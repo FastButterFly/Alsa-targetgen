@@ -24,11 +24,11 @@ public class ParseTarget {
 
         targetLines.forEach(e -> {
             if(e.startsWith("$") || e.startsWith("$ ")) {
-                String args[] = e.strip().split("\\s+");
+                String args[] = e.split("\\s+");
                 if(args[0] == "$") {
                     args[0] = "";
                 } else { if (args[0].startsWith("$")) {
-                    args[0] = args[0].substring(1);
+                    args[0] = args[0].substring(2);
                 }}
 
                 commands = args;
