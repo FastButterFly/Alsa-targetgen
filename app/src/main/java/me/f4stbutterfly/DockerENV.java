@@ -3,7 +3,8 @@ package me.f4stbutterfly;
 public enum DockerENV {
 
     ubuntu_22("ubuntu:22.04"),
-    ubuntu_24("ubuntu:24.04");
+    ubuntu_24("ubuntu:24.04"),
+    INVALID("INVALID_ENV");
 
     private final String dockerName;
 

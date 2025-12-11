@@ -15,51 +15,58 @@ public class ParseTarget {
     public TargetFile file;
 
     public String[] commands;
-    public String _AP;
+    public String AP;
 
     public void parseFile(String path) throws IOException{
-        String AP = System.getProperty("user.dir");
-        _AP = AP;
+        AP = System.getProperty("user.dir");
         List<String> targetLines = Files.readAllLines(Paths.get("path"));
 
         targetLines.forEach(e -> {
-            if(e.startsWith("$") || e.startsWith("$ ")) {
+            if(e.startsWith("$")) {
                 String args[] = e.split("\\s+");
                 if(args[0] == "$") {
                     args[0] = "";
-                } else { if (args[0].startsWith("$")) {
-                    args[0] = args[0].substring(2);
-                }}
-
+                }
                 commands = args;
             }
         });
     }
 
     public void buildFileClass() throws Exception {
-        String name;
-        boolean a; // rebuild
-        boolean b; // allow run
-        DockerENV e;
+        String name = null; // Target name
+        boolean a = false; // Do a rebuild?
+        boolean b = false; // Allow run?
+        DockerENV e = DockerENV.INVALID; // Docker env
+
+        int cmpb = 0; // if less than 4. Required parameteres didn't got provided
         for( int i = 0; i >= commands.length; i++) {
             switch((commands[i])) {
                 case "TARGET":
                     name = commands[i + 1];
+                    cmpb += 1;
                     break;
                 case "TARGET_REBUILD":
                     a = Boolean.getBoolean(commands[i + 1]);
+                    cmpb += 1;
                     break;
                 case "TARGET_ALLOW_RUN":
                     b = Boolean.getBoolean(commands[i + 1]);
+                    cmpb += 1;
                     break;
                 case "TARGET_ENV":
                     e = DockerENV.fromString(commands[i + 1]);
+                    cmpb += 1;
                     break;
                 default:
                     break;
             }
         }
 
-        throw new Exception("Failed to load Target File: Required commands not provided");
+        // Scream at user if they don't provide basic parameters
+        if (cmpb > 4 || cmpb < 4) {
+            throw new Exception("Failed to load Target File: Required commands not provided");
+        } else {
+            file = new TargetFile(name, a, b, e, AP);
+        }
     }
 }
