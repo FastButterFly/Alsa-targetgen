@@ -15,7 +15,8 @@ public class Action {
 
     public void _execute() throws IOException {
         Util.getInstance().handleCREPEnforcment();
+        this.start(File);
     }
 
-    public void start(TargetFile f) {};
+    public void start(TargetFile f) throws IOException  {};
 }

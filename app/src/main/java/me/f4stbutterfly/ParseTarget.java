@@ -18,8 +18,8 @@ public class ParseTarget {
     public String AP;
 
     public void parseFile(String path) throws IOException{
-        AP = System.getProperty("user.dir");
-        List<String> targetLines = Files.readAllLines(Paths.get("path"));
+        AP = Paths.get(path).toAbsolutePath().getParent().toString();
+        List<String> targetLines = Files.readAllLines(Paths.get(path));
 
         targetLines.forEach(e -> {
             if(e.startsWith("$")) {
