@@ -66,7 +66,7 @@ public class ParseTarget {
         if (cmpb > 4 || cmpb < 4) {
             throw new Exception("Failed to load Target File: Required commands not provided");
         } else {
-            file = new TargetFile(name, a, b, e, AP);
+            file = new TargetFile(name, a, b, e, AP, commands);
         }
     }
 }

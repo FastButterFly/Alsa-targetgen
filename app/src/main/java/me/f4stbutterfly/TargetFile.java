@@ -6,12 +6,14 @@ public class TargetFile {
     public final boolean allowRun;
     public final DockerENV env;
     public final String absolutePath;
+    public final String[] fileCommands;
 
-    public TargetFile(String n, boolean dRb, boolean aR, DockerENV e, String aP) {
+    public TargetFile(String n, boolean dRb, boolean aR, DockerENV e, String aP, String[] commmands) {
         this.name = n;
         this.doRebuild = dRb;
         this.allowRun = aR;
         this.env = e;
         this.absolutePath = aP;
+        this.fileCommands = commmands;
     }
 }
