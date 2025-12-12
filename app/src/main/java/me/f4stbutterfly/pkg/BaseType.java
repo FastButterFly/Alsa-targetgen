@@ -1,10 +1,10 @@
 package me.f4stbutterfly.pkg;
 
 public class BaseType {
-    public final String name;
-    public final String[] args;
+    public String name;
+    public String[] args;
 
-    protected BaseType(String a, String[] as) {
+   public BaseType(String a, String[] as) {
         name = a;
         args = as;
     }
