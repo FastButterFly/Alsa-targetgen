@@ -5,7 +5,7 @@ import me.f4stbutterfly.actions.app.BuildAction;
 
 public class App {
     // Builder entry point
-    public static void Main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         
         if(args.length > 2 || args.length < 2) {
             System.err.println("Invalid parameters! Check docks for usage!");

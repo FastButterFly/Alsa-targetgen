@@ -3,6 +3,7 @@ package me.f4stbutterfly;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParseTarget {
@@ -14,7 +15,7 @@ public class ParseTarget {
 
     public TargetFile file;
 
-    public List<String> commands;
+    public List<String> commands = new ArrayList<>();
     public String AP;
 
     public void parseFile(String path) throws IOException{
