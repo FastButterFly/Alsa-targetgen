@@ -42,7 +42,7 @@ public class ParseTarget {
 
         int cmpb = 0; // if less than 4. Required parameteres didn't got provided
 
-        for(int i=0; i <= types.size(); i++) {
+        for(int i=0; i < types.size(); i++) {
             switch(type.get(i).name) {
                 case "TARGET":
                     name = type.get(i).args[0];

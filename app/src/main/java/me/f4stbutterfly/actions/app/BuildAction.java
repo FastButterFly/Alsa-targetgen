@@ -24,7 +24,7 @@ public class BuildAction extends Action {
         instru.add("FROM " + this.File.env);
         instru.add("RUN apt-get update && apt-get upgrade" + this.File.env);
 
-        for(int i=0; i <= a.size(); i++) {
+        for(int i=0; i < a.size(); i++) {
             switch(a.get(i).name) {
                 case "TARGET_ENV_APT":
                     instru.add("RUN apt-get install " + a.get(i).args[0] + " -y");
