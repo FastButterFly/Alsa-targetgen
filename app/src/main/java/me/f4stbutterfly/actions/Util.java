@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import me.f4stbutterfly.TargetFile;
-
 public class Util {
     private static final Util instance = new Util();
     public static final Util getInstance() {
@@ -31,13 +29,5 @@ public class Util {
         } else {
             throw new IllegalStateException("Failed to enforce CREP (Counter root execution policy). Unknown OS");
         }
-    }
-
-    public boolean containsCommand(TargetFile f, String command) {
-        for (String a : f.fileCommands) {
-            if(a.equals(command)) return true;
-        }
-
-        return false;
     }
 }

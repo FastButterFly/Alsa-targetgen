@@ -15,9 +15,8 @@ public class App {
         switch(args[0]) {
             case "build":
                 ParseTarget.getInstance().parseFile(args[1] + "/INDEX.TARGET");
-                ParseTarget.getInstance().buildFileClass();
                 BuildAction action = new BuildAction(ParseTarget.getInstance().file);
-                action._execute();
+                action._execute(ParseTarget.getInstance().type);
                 break;
             default:
                 System.err.println("Invalid parameters! Check docks for usage!");

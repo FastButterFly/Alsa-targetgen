@@ -6,6 +6,7 @@ import java.util.List;
 
 import me.f4stbutterfly.TargetFile;
 import me.f4stbutterfly.actions.Action;
+import me.f4stbutterfly.pkg.BaseType;
 
 public class BuildAction extends Action {
 
@@ -16,7 +17,7 @@ public class BuildAction extends Action {
     private List<String> instru = new ArrayList<String>();
 
     @Override
-    public void start(List<String> a) throws IOException {
+    public void start(List<BaseType> a) throws IOException {
 
         instru.add("FROM " + this.File.env);
         
