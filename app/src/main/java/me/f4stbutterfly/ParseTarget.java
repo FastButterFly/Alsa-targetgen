@@ -30,6 +30,11 @@ public class ParseTarget {
         List<String> content = new ArrayList<>();
         content.addAll(Files.readAllLines(Paths.get(path)));
         TypeToken<Collection<BaseType>> collectionType = new TypeToken<Collection<BaseType>>(){};
+        String asdadsdas = content.toString().strip();
+        if(asdadsdas.startsWith("[[") && asdadsdas.endsWith("]]")) {
+            asdadsdas = asdadsdas.substring(1, asdadsdas.length() - 1);
+        }
+        System.out.println(asdadsdas);
         types = gson.fromJson(content.toString().strip(), collectionType);
         type.addAll(types);
 
