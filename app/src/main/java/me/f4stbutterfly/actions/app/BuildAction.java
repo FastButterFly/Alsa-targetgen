@@ -23,6 +23,7 @@ public class BuildAction extends Action {
 
         instru.add("FROM " + this.File.env);
         instru.add("RUN apt-get update && apt-get upgrade");
+        instru.add("RUN apt-get update && apt-get upgrade");
 
         for(int i=0; i < a.size(); i++) {
             switch(a.get(i).name) {
@@ -34,6 +35,9 @@ public class BuildAction extends Action {
                     break;
                 case "TARGET_ENV_INITFILE":
                     instru.add("CMD [ \" " + a.get(i).args[0] + " \" ]");
+                    break;
+                case "TARGET_ENV_SHAREFOLDER":
+                    instru.add("MKDIR " + a.get(i).args[0]);
                     break;
                 default:
                     break;
