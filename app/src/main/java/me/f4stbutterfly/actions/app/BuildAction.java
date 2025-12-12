@@ -8,7 +8,6 @@ import java.util.List;
 
 import me.f4stbutterfly.TargetFile;
 import me.f4stbutterfly.actions.Action;
-import me.f4stbutterfly.actions.Util;
 
 public class BuildAction extends Action {
 
@@ -23,24 +22,35 @@ public class BuildAction extends Action {
 
         instru.add("FROM " + f.env.getDockerString());
         
-        for(int i=0;i>=f.fileCommands.length;i++) {
-            switch(f.fileCommands[i]) {
+        for(int i=0;i>=f.fileCommands.size();i++) {
+            String cmd = f.fileCommands.get(i);
+            switch(cmd) {
                 case "TARGET_ENV_APT":
-                    instru.add("RUN apt-get install " + f.fileCommands[i+1] + " -y");
+                    if (i + 1 < f.fileCommands.size()) {
+                        instru.add("RUN apt-get install " + f.fileCommands.get(i + 1) + " -y");
+                    }
+                    i++;
                     break;
                 case "TARGET_ENV_COPY":
-                    instru.add("COPY " + f.fileCommands[i+1] + f.fileCommands[i+2]);
+                    if (i + 1 < f.fileCommands.size() && i + 2 < f.fileCommands.size()) {
+                        instru.add("COPY " + f.fileCommands.get(i + 1) + " " +f.fileCommands.get(i + 2) );
+                    }
+                    i++;
                     break;
                 case "TARGET_ENV_INITFILE":
-                    instru.add("CMD [\" " + f.fileCommands[i+1] + " \"] ");
+                    if (i + 1 < f.fileCommands.size()) {
+                        instru.add("CMD [\" " + f.fileCommands.get(i + 1) + " \" ]" );
+                    }
+                    i++;
+                    //instru.add("CMD [\" " + f.fileCommands[i+1] + " \"] ");
                     break;
+                case "TARGET_ENV_SETWORKFOLDER":
+                    if (i + 1 < f.fileCommands.size()) {
+                        instru.add("WORKDIR" + f.fileCommands.get(i + 1) );
+                    }
+                    i++;
                 default:
                     break;
-            }
-        }
-        for(String a : f.fileCommands) {
-            if(a.equals("TARGET_ENV_SETWORKFOLDER")) {
-                instru.add("WORKDIR " + f.fileCommands[Util.getInstance().getCommandIndex(f, a) + 1]);
             }
         }
 

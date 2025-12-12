@@ -14,7 +14,7 @@ public class ParseTarget {
 
     public TargetFile file;
 
-    public String[] commands;
+    public List<String> commands;
     public String AP;
 
     public void parseFile(String path) throws IOException{
@@ -22,45 +22,73 @@ public class ParseTarget {
         List<String> targetLines = Files.readAllLines(Paths.get(path));
 
         targetLines.forEach(e -> {
-            if(e.startsWith("$")) {
-                String args[] = e.split("\\s+");
-                if(args[0] == "$") {
-                    args[0] = "";
-                }
-                commands = args;
+            String args[] = e.split("\\s+");
+            for (String b : args) {
+                commands.add(b);
             }
         });
     }
 
     public void buildFileClass() throws Exception {
-        String name = null; // Target name
+        String name = ""; // Target name
         boolean a = false; // Do a rebuild?
         boolean b = false; // Allow run?
         DockerENV e = DockerENV.INVALID; // Docker env
 
         int cmpb = 0; // if less than 4. Required parameteres didn't got provided
-        for( int i = 0; i >= commands.length; i++) {
-            switch((commands[i])) {
+        for( int i = 0; i < commands.size(); i++) {
+            String cmd = commands.get(i);
+            switch(cmd) {
                 case "TARGET":
-                    name = commands[i + 1];
-                    cmpb += 1;
+                    if (i + 1 < commands.size()) {
+                        name = commands.get(i + 1);
+                        cmpb++;
+                    }
+                    i++;
                     break;
                 case "TARGET_REBUILD":
-                    a = Boolean.getBoolean(commands[i + 1]);
-                    cmpb += 1;
+                    if (i + 1 < commands.size()) {
+                        a = Boolean.parseBoolean(commands.get(i + 1));
+                        cmpb++;
+                    }
+                    i++;
                     break;
                 case "TARGET_ALLOW_RUN":
-                    b = Boolean.getBoolean(commands[i + 1]);
-                    cmpb += 1;
+                    if (i + 1 < commands.size()) {
+                        b = Boolean.parseBoolean(commands.get(i + 1));
+                        cmpb++;
+                    }
+                    i++;
                     break;
                 case "TARGET_ENV":
-                    e = DockerENV.fromString(commands[i + 1]);
-                    cmpb += 1;
+                    if (i + 1 < commands.size()) {
+                        e = DockerENV.fromString(commands.get(i + 1));
+                        cmpb++;
+                    }
+                    i++;
                     break;
                 default:
                     break;
             }
         }
+        //commands.forEach(str -> {
+        //    switch(str) {
+        //       case "TARGET":
+        //            name = commands.get(commands.indexOf(str) + 1);
+        //            break;
+        //        case "TARGET_REBUILD":
+        //            a = Boolean.getBoolean(commands.get(commands.indexOf(str) + 1));
+        //            break;
+        //        case "TARGET_ALLOW_RUN":
+        //            b = Boolean.getBoolean(commands.get(commands.indexOf(str) + 1));
+        //            break;
+        //        case "TARGET_ENV":
+        //            e = DockerENV.fromString(commands.get(commands.indexOf(str) + 1));
+        //           break;
+        //        default:
+        //            break;
+        //    }
+        //});
 
         // Scream at user if they don't provide basic parameters
         if (cmpb > 4 || cmpb < 4) {

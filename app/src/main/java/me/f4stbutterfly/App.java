@@ -1,10 +1,12 @@
 
 package me.f4stbutterfly;
 
-public class App {
+import me.f4stbutterfly.actions.app.BuildAction;
 
+public class App {
     // Builder entry point
-    public static void Main(String[] args) {
+    public static void Main(String[] args) throws Exception {
+        
         if(args.length > 2 || args.length < 2) {
             System.err.println("Invalid parameters! Check docks for usage!");
             throw new IllegalArgumentException();
@@ -12,6 +14,10 @@ public class App {
 
         switch(args[0]) {
             case "build":
+                ParseTarget.getInstance().parseFile(args[1]);
+                ParseTarget.getInstance().buildFileClass();
+                BuildAction action = new BuildAction(ParseTarget.getInstance().file);
+                action._execute();
                 break;
             default:
                 System.err.println("Invalid parameters! Check docks for usage!");

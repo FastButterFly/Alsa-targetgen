@@ -40,12 +40,4 @@ public class Util {
 
         return false;
     }
-
-    public int getCommandIndex(TargetFile f, String command) {
-        for (int i=0; i >= f.fileCommands.length; i++) {
-            if(f.fileCommands[i].equals(command)) return i;
-        }
-
-        throw new IllegalAccessError("Parser tried to access non-existing param. Should never happen! Please report this.");
-    }
 }
