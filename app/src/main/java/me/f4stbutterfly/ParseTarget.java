@@ -28,6 +28,8 @@ public class ParseTarget {
                 commands.add(b);
             }
         });
+
+        System.out.print(commands);
     }
 
     public void buildFileClass() throws Exception {
@@ -45,28 +47,28 @@ public class ParseTarget {
                         name = commands.get(i + 1);
                         cmpb++;
                     }
-                    i++;
+                    //i++;
                     break;
                 case "TARGET_REBUILD":
                     if (i + 1 < commands.size()) {
                         a = Boolean.parseBoolean(commands.get(i + 1));
                         cmpb++;
                     }
-                    i++;
+                    //i++;
                     break;
                 case "TARGET_ALLOW_RUN":
                     if (i + 1 < commands.size()) {
                         b = Boolean.parseBoolean(commands.get(i + 1));
                         cmpb++;
                     }
-                    i++;
+                    //i++;
                     break;
                 case "TARGET_ENV":
                     if (i + 1 < commands.size()) {
                         e = DockerENV.fromString(commands.get(i + 1));
                         cmpb++;
                     }
-                    i++;
+                    //i++;
                     break;
                 default:
                     break;

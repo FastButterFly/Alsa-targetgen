@@ -29,26 +29,26 @@ public class BuildAction extends Action {
                     if (i + 1 < f.fileCommands.size()) {
                         instru.add("RUN apt-get install " + f.fileCommands.get(i + 1) + " -y");
                     }
-                    i++;
+                    //i++;
                     break;
                 case "TARGET_ENV_COPY":
                     if (i + 1 < f.fileCommands.size() && i + 2 < f.fileCommands.size()) {
                         instru.add("COPY " + f.fileCommands.get(i + 1) + " " +f.fileCommands.get(i + 2) );
                     }
-                    i++;
+                    //i++;
                     break;
                 case "TARGET_ENV_INITFILE":
                     if (i + 1 < f.fileCommands.size()) {
                         instru.add("CMD [\" " + f.fileCommands.get(i + 1) + " \" ]" );
                     }
-                    i++;
+                    //i++;
                     //instru.add("CMD [\" " + f.fileCommands[i+1] + " \"] ");
                     break;
                 case "TARGET_ENV_SETWORKFOLDER":
                     if (i + 1 < f.fileCommands.size()) {
                         instru.add("WORKDIR" + f.fileCommands.get(i + 1) );
                     }
-                    i++;
+                    //i++;
                 default:
                     break;
             }
