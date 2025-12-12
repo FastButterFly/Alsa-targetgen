@@ -1,10 +1,11 @@
 package me.f4stbutterfly;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import me.f4stbutterfly.pkg.BaseType;
 
 public class ParseTarget {
     public static final ParseTarget instance = new ParseTarget();
@@ -20,25 +21,16 @@ public class ParseTarget {
 
     public void parseFile(String path) throws IOException{
         AP = Paths.get(path).toAbsolutePath().getParent().toString();
-        List<String> targetLines = Files.readAllLines(Paths.get(path));
-
-        targetLines.forEach(e -> {
-            String args[] = e.split("\\s+");
-            for (String b : args) {
-                commands.add(b);
-            }
-        });
-
-        System.out.print(commands);
+        List<BaseType> types;
     }
 
     public void buildFileClass() throws Exception {
-        String name = ""; // Target name
+        /* String name = ""; // Target name
         boolean a = false; // Do a rebuild?
         boolean b = false; // Allow run?
-        DockerENV e = DockerENV.INVALID; // Docker env
+        DockerENV e = DockerENV.INVALID; // Docker env */
 
-        int cmpb = 0; // if less than 4. Required parameteres didn't got provided
+        /* int cmpb = 0; // if less than 4. Required parameteres didn't got provided
         for( int i = 0; i < commands.size(); i++) {
             String cmd = commands.get(i);
             switch(cmd) {
@@ -98,6 +90,6 @@ public class ParseTarget {
             throw new Exception("Failed to load Target File: Required commands not provided");
         } else {
             file = new TargetFile(name, a, b, e, AP, commands);
-        }
+        } */
     }
 }

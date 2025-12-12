@@ -1,8 +1,6 @@
 package me.f4stbutterfly.actions.app;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +16,11 @@ public class BuildAction extends Action {
     private List<String> instru = new ArrayList<String>();
 
     @Override
-    public void start(TargetFile f) throws IOException {
+    public void start(List<String> a) throws IOException {
 
-        instru.add("FROM " + f.env.getDockerString());
+        instru.add("FROM " + this.File.env);
         
-        for(int i=0;i>=f.fileCommands.size();i++) {
+        /* for(int i=0;i>=f.fileCommands.size();i++) {
             String cmd = f.fileCommands.get(i);
             switch(cmd) {
                 case "TARGET_ENV_APT":
@@ -56,6 +54,6 @@ public class BuildAction extends Action {
 
         Files.write(Paths.get(f.absolutePath + "/dockerfile"), instru);
 
-        super.start(f);
+        super.start(f); */
     }
 }

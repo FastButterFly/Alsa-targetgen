@@ -1,6 +1,7 @@
 package me.f4stbutterfly.actions;
 
 import java.io.IOException;
+import java.util.List;
 
 import me.f4stbutterfly.TargetFile;
 
@@ -15,8 +16,8 @@ public class Action {
 
     public void _execute() throws IOException {
         Util.getInstance().handleCREPEnforcment();
-        this.start(File);
+        this.start(File.fileCommands);
     }
 
-    public void start(TargetFile f) throws IOException  {};
+    public void start(List<String> a) throws IOException  {};
 }
