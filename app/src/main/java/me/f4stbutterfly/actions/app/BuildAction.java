@@ -22,6 +22,7 @@ public class BuildAction extends Action {
     public void start(List<BaseType> a) throws IOException {
 
         instru.add("FROM " + this.File.env);
+        instru.add("RUN apt-get update && apt-get upgrade" + this.File.env);
 
         for(int i=0; i <= a.size(); i++) {
             switch(a.get(i).name) {
