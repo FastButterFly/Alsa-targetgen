@@ -47,7 +47,16 @@ public class ParseTarget {
                     cmpb += 1;
                     break;
                 case "TARGET_REBUILD":
-                    
+                    a = Boolean.parseBoolean(type.get(i).args[0]);
+                    cmpb += 1;
+                    break;
+                case "TARGET_ALLOW_RUN":
+                    a = Boolean.parseBoolean(type.get(i).args[0]);
+                    cmpb += 1;
+                    break;
+                case "TARGET_ENV_SETWORKFOLDER":
+                    b = Boolean.parseBoolean(type.get(i).args[0]);
+                    cmpb += 1;
                     break;
                 default:
                     break;

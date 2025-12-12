@@ -1,6 +1,8 @@
 package me.f4stbutterfly.actions.app;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,41 +22,25 @@ public class BuildAction extends Action {
     public void start(List<BaseType> a) throws IOException {
 
         instru.add("FROM " + this.File.env);
-        
-        /* for(int i=0;i>=f.fileCommands.size();i++) {
-            String cmd = f.fileCommands.get(i);
-            switch(cmd) {
+
+        for(int i=0; i <= a.size(); i++) {
+            switch(a.get(i).name) {
                 case "TARGET_ENV_APT":
-                    if (i + 1 < f.fileCommands.size()) {
-                        instru.add("RUN apt-get install " + f.fileCommands.get(i + 1) + " -y");
-                    }
-                    //i++;
+                    instru.add("RUN apt-get install " + a.get(i).args[0] + " -y");
                     break;
                 case "TARGET_ENV_COPY":
-                    if (i + 1 < f.fileCommands.size() && i + 2 < f.fileCommands.size()) {
-                        instru.add("COPY " + f.fileCommands.get(i + 1) + " " +f.fileCommands.get(i + 2) );
-                    }
-                    //i++;
+                    instru.add("COPY " + a.get(i).args[0] + " " + a.get(i).args[1]);
                     break;
                 case "TARGET_ENV_INITFILE":
-                    if (i + 1 < f.fileCommands.size()) {
-                        instru.add("CMD [\" " + f.fileCommands.get(i + 1) + " \" ]" );
-                    }
-                    //i++;
-                    //instru.add("CMD [\" " + f.fileCommands[i+1] + " \"] ");
+                    instru.add("CMD [ \" " + a.get(i).args[0] + " \" ]");
                     break;
-                case "TARGET_ENV_SETWORKFOLDER":
-                    if (i + 1 < f.fileCommands.size()) {
-                        instru.add("WORKDIR" + f.fileCommands.get(i + 1) );
-                    }
-                    //i++;
                 default:
                     break;
             }
-        }
+        };
 
-        Files.write(Paths.get(f.absolutePath + "/dockerfile"), instru);
+        Files.write(Paths.get(File.absolutePath + "/dockerfile"), instru);
 
-        super.start(f); */
+        super.start(a);
     }
 }
