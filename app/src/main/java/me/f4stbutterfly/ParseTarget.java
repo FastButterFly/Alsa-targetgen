@@ -46,6 +46,10 @@ public class ParseTarget {
                     name = type.get(i).args[0];
                     cmpb += 1;
                     break;
+                case "TARGET_ENV":
+                    e = DockerENV.fromString(type.get(i).args[0]);
+                    cmpb += 1;
+                    break;
                 case "TARGET_REBUILD":
                     a = Boolean.parseBoolean(type.get(i).args[0]);
                     cmpb += 1;
