@@ -27,7 +27,7 @@ public class ComposeAction extends Action {
             }
         }
 
-        String command = "docker build -t " + dockerImageName + ":latest" + File.absolutePath;
+        String command = "docker build -t " + dockerImageName + " " + File.absolutePath;
 
         Runtime.getRuntime().exec(command);
 
