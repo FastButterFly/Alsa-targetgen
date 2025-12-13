@@ -52,14 +52,6 @@ public class ParseTarget {
                     e = DockerENV.fromString(type.get(i).args[0]);
                     cmpb += 1;
                     break;
-                case "TARGET_REBUILD":
-                    a = Boolean.parseBoolean(type.get(i).args[0]);
-                    cmpb += 1;
-                    break;
-                case "TARGET_ALLOW_RUN":
-                    a = Boolean.parseBoolean(type.get(i).args[0]);
-                    cmpb += 1;
-                    break;
                 case "TARGET_ENV_SETWORKFOLDER":
                     b = Boolean.parseBoolean(type.get(i).args[0]);
                     cmpb += 1;
@@ -70,7 +62,7 @@ public class ParseTarget {
         };
 
         // Scream at user if they don't provide basic parameters
-        if (cmpb > 4 || cmpb < 4) {
+        if (cmpb > 3 || cmpb < 3) {
             throw new Exception("Failed to load Target File: Required commands not provided");
         } else {
             file = new TargetFile(name, a, b, e, AP);

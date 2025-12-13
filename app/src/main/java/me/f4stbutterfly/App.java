@@ -2,7 +2,6 @@
 package me.f4stbutterfly;
 
 import me.f4stbutterfly.actions.app.BuildAction;
-import me.f4stbutterfly.actions.app.ComposeAction;
 
 public class App {
     // Builder entry point
@@ -19,11 +18,11 @@ public class App {
                 BuildAction action = new BuildAction(ParseTarget.getInstance().file);
                 action._execute(ParseTarget.getInstance().type);
                 break;
-            case "compose":
+            /*case "compose":
                 ParseTarget.getInstance().parseFile(args[1] + "/index.json");
                 ComposeAction action2 = new ComposeAction(ParseTarget.getInstance().file);
                 action2._execute(ParseTarget.getInstance().type);
-                break;
+                break; */
             default:
                 System.err.println("Invalid parameters! Check docks for usage!");
                 throw new IllegalArgumentException();
