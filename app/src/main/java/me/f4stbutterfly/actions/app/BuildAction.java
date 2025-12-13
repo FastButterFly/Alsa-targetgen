@@ -23,7 +23,6 @@ public class BuildAction extends Action {
 
         instru.add("FROM " + this.File.env);
         instru.add("RUN apt-get update && apt-get upgrade");
-        instru.add("RUN apt-get update && apt-get upgrade");
 
         for(int i=0; i < a.size(); i++) {
             switch(a.get(i).name) {

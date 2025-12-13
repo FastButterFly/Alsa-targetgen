@@ -1,13 +1,22 @@
 Commands. <target> is a folder that contains INDEX.target file
 
 alsa-targetgen build <target> -- Builds docker image to build the target
-alsa-targetgen run <target> -- Runs build process with pre-builded (Using build <target>) image (user must be in docker group. App will refuse to run anything from root)
-alsa-targetgen exec <target> -- Executes program if .target file allows it.
+alsa-targetgen compose <target> -- Runs build process with pre-builded (Using build <target>) image (user must be in docker group. App will refuse to run anything from root)
+alsa-targetgen compile <target> -- Runs docker container from image of composed target
+alsa-targetgen run <target> -- Executes program if .target file allows it.
 
 every .target file can contain following "commands":
 
+Target file is costructed as following:
+It is a json file that are an array []
+And every command is provided like that
+{
+    "name": "COMMAND_NAME",
+    "args": [ command args ( Has to be provided as a string even if it's a boolean ) ]
+}
+
 TARGET <name> - Required gives target a name (Docker image name is alsa-targetgen-target-<name>)
-TARGET_REBUILD <true/false> - Required. Should the docker image deleted after running?
+TARGET_REBUILD <true/false> - Required. Should the docker image deleted after compiling the program?
 TARGET_ALLOW_RUN <true/false> - Required. Allow project to be runned? (execs ./output/target_run.sh)
 TARGET_ENV <base_image> - Required. Docker base image (supported ubuntu_22 (22.04), ubuntu_24 (24.04))
 TARGET_ENV_SETWORKFOLDER <folder name> - Change docker WORKDIR name (recomended APP)
