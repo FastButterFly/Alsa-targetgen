@@ -21,7 +21,7 @@ public class BuildAction extends Action {
     @Override
     public void start(List<BaseType> a) throws IOException {
 
-        instru.add("FROM " + this.File.env);
+        instru.add("FROM " + this.File.env.getDockerString());
         instru.add("RUN apt-get update && apt-get upgrade");
 
         for(int i=0; i < a.size(); i++) {
